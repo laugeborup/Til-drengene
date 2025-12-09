@@ -1,0 +1,976 @@
+/* Kundereviews og tekstbokse */
+.customer-reviews-flex {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 32px;
+  margin: 40px 0 60px;
+  flex-wrap: wrap;
+}
+.customer-reviews-flex .textwrapper {
+  background: #f5f5f5;
+  border-radius: 8px;
+  padding: 0 20px;
+  font-size: 1.15rem;
+  color: #23201b;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  max-width: 370px;
+  min-width: 220px;
+  min-height: 200px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: "Inter", "Roboto", sans-serif;
+}
+/* Reset + simple typografi */
+:root{
+  --bg-cream: hsl(0, 0%, 100%);
+  --warm-shadow: rgba(0,0,0,0.18);
+  --accent-dark: #23201b;
+  --muted: #6b665f;
+  --marble-light: #f7efe6;
+  --marble-vein: rgba(178,120,60,0.12);
+  --btn-bg: #ffffff;
+  --btn-border: rgba(0,0,0,0.08);
+  --width: 1365px; /* mål for pixel-nøjagtig layout */
+  --height: 768px;
+  --logo-height: 64px; /* increase logo size */
+  font-family: "Inter", "Inter", "Inter", Roboto, sans-serif;
+}
+
+/* Baseline */
+* {
+  box-sizing: border-box;
+}
+body {
+  height: 100%;
+  margin: 0;
+  color: var(--accent-dark);
+  /* Baggrundsbillede: image16.jpg, gentaget lodret, ikke fastgjort, bag alt indhold */
+  background: url("Images2/image16.jpg") repeat-y center top;
+  background-size: auto;
+  background-attachment: scroll;
+  /* For at gøre billedet halvgennemsigtigt, bruges et overlay i HTML eller :before, men her kun baggrund */
+}
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch; 
+  justify-content: flex-start;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+    background: url("Images2/image16.jpg") repeat-y center top;
+  background-size: auto;
+}
+
+/* Fikser layoutet til den samme pixelstørrelse */
+.site-header {
+  width: 100%;
+  height: 88px;
+  padding: 5px 10px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #ffffff;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.12); /* Drop shadow til navbar */
+}
+.header-inner{
+  display:flex;align-items:center;justify-content:space-between;
+}
+
+/* Logo venstre */
+.logo{display:flex;align-items:center}
+.logo img {
+  height: var(--logo-height);
+  width: auto;
+  display: block;
+  object-fit: contain;
+}
+
+/* Navigation midt/venstre */
+.top-nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  gap: 100px;
+}
+
+.top-nav li {
+  border-right: 1px solid rgba(0,0,0,0.15);
+}
+.top-nav li:last-child {
+  border-right: none;
+}
+
+.top-nav a{
+  color:#111110;
+  text-decoration:none;
+  letter-spacing:0.02em;
+  opacity:0.9;
+  font-weight: 500;
+  transition: color 0.18s, transform 0.18s cubic-bezier(.4,1.3,.5,1);
+  display: inline-block;
+}
+
+.top-nav a:hover {
+  color: #000000;
+  transform: scale(1.08);
+}
+
+/* ikoner højre */
+.header-actions{display:flex;gap:12px}
+.searchbar-input {
+  font-size: 1rem;
+  padding: 6px 16px;
+  border-radius: 18px;
+  border: 1.5px solid #bdbdbd;
+  outline: none;
+  margin-left: 8px;
+  transition: width 0.25s, opacity 0.2s;
+  width: 160px;
+  opacity: 1;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+.searchbar-input.hide {
+  body {
+    height: 100%;
+    margin: 0;
+    color: var(--accent-dark);
+    display: flex;
+    flex-direction: column;
+    align-items: stretch; /* allow full-bleed children */
+    justify-content: flex-start;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* Baggrundsbillede: image16.jpg, gentaget lodret, ikke fastgjort, bag alt indhold */
+    background: url("Images2/image16.jpg") repeat-y center top;
+    background-size: auto;
+    background-attachment: scroll;
+  }
+  border-top:1px solid rgba(0,0,0,0.02);
+  box-shadow:0 0 0 rgba(0,0,0,0);
+}
+
+
+/* en stor blød lys-skygge, der imiterer sol */
+.sun-shadows{
+  position:absolute;right:6%;top:6%;width:55%;height:120%;
+  transform:skewX(-10deg);
+  background:linear-gradient(120deg, rgba(255,255,255,0.2), rgba(0,0,0,0.03) 60%);
+  filter:blur(36px);
+  opacity:0.85;
+}
+
+
+/* indholdslag over baggrunden */
+.hero-inner{
+  position:relative;z-index:10;display:flex;height:100%;gap:32px;
+  padding:56px 64px;
+  align-items:stretch;
+}
+
+/* Venstre promo kolonne */
+.promo{
+  width:46%;
+  display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;
+  padding-top:60px;
+  padding-bottom:70px;
+  color:var(--btn-bg);
+  mix-blend-mode:normal;
+}
+
+/* Pris-typografi */
+.promo .price {
+  font-size:70px;
+  margin:32px 0 0 0;
+  line-height:0.4;
+  color:#fff;
+  font-weight:600;
+  font-family:'Inter_', sans-serif;
+  text-shadow: 0 10px 30px rgba(0,0,0,0.45);
+  letter-spacing:-1px;
+}
+
+
+/* note under prisen */
+.promo .price-note {
+  margin-top:24px;
+  color:rgba(255,255,255,0.85);
+  font-size:16px;
+  margin-bottom: 1px;
+
+}
+
+/* CTA-knap - Køb Nu */
+.promo .cta {
+  margin-top:8px;
+  display:inline-flex;align-items:center;justify-content:center;
+  background:var(--btn-bg);
+  color:var(--accent-dark);
+  text-decoration:none;
+  padding:18px 54px;
+  border-radius:40px;
+  font-weight:760;
+  font-size:20px;
+  box-shadow:0 8px 30px rgba(0,0,0,0.18);
+  border: 1px solid var(--btn-border);
+  transition:transform .12s ease, box-shadow .12s ease;
+}
+.cta:active{transform:translateY(1px)}
+.cta span{letter-spacing:0.12em}
+
+/* farve-prikker */
+
+.color-choices {
+  display: flex;
+  gap: 10px;
+  margin-top: 38px; /* Flyt farveprikkerne længere ned */
+  margin-left: 50px;
+  margin-bottom: -120px;
+}
+.dot{
+  width:17px;height:17px;border-radius:50%;display:inline-block;border:7px solid rgba(0,0,0,0.06);
+  box-shadow:0 2px 6px rgba(0,0,0,0.18) inset;
+}
+.dot-1{background: #bdffb8} /* grønlig */
+.dot-2{background: #c098e9} /* lilla */
+.dot-3{background: #f191d9} /* rosa */
+.dot-4{background: #fcffec} /* lys */
+
+/* Dot hover effects */
+.dot:hover {
+  box-shadow: 0 0 0 3px #b3b3b3, 0 2px 6px rgba(0,0,0,0.18) inset;
+  cursor: pointer;
+  transform: scale(1.12);
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+
+/* Højre kolonne: produkt */
+.product-stage{
+  position:relative;
+  width:54%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:visible;
+}
+
+
+/* Helper: hero image that covers the full hero area (use an <img class="hero-media"> inside .hero) */
+.hero-media{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  z-index:0; 
+  pointer-events:none;
+}
+
+/* Produktkort -  højttaleren i midten */
+.product-card{
+  position:relative;z-index:100;width:800px;height:780px;border-radius:22px;
+  background:transparent;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:none;
+  transform:none;
+  border-radius:4px;
+  padding:5px;
+  margin:2000;
+  margin-bottom:-180px;
+  margin-left: 0px;
+  margin-right: 850px;
+}
+
+.product-card img{
+  width:500px;height:auto;display:block;object-fit:contain;border-radius:4px;
+  filter:drop-shadow(0 8px 30px rgba(0,0,0,0.25));
+}
+
+/* stor retningstitel til højre */
+.hero-title{
+  position:absolute;right:30px;top:6%;
+  text-align:right;line-height:0.85;z-index:5;
+  font-family:Inter_24, sans-serif;
+}
+.hero-title .big{
+  font-size:164px;font-weight:550;color:rgba(27,22,18,0.98);letter-spacing:-1px;
+}
+.hero-title .sub{
+  font-size:134px;font-weight:550;color:rgba(27,22,18,0.95);margin-top:8px
+}
+
+/* RESPONSIV - siden vil skaleres pænt ned */
+@media (max-width:1200px){
+  :root{--width:1100px}
+  .price{font-size:72px}
+  .price-amount{font-size:90px}
+  .hero-title .big{font-size:96px}
+  .hero-title .sub{font-size:64px}
+  .product-card{width:240px;height:240px;transform:translateY(-90px)}
+  .podium{width:620px;height:150px;bottom:48px}
+}
+
+@media (max-width:900px){
+  /* lille skærm: kolonner stables */
+  .hero-inner{flex-direction:column;align-items:flex-start;padding:24px}
+  .promo{width:100%}
+  .product-stage{width:100%;margin-top:12px}
+  .hero-title{position:relative;right:auto;top:auto;text-align:left;margin-top:20px}
+  .podium{width:420px;height:120px;left:50%;transform:translateX(-50%);bottom:36px}
+  .product-card{transform:translateY(-60px)}
+}
+
+/* Global styling */
+
+/* Hero wrap section with video */
+.hero-wrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  /* Tile the artwork vertically (repeat down) and keep centered horizontally */
+  background-image: url("Images 2/image 16.jpg") !important;
+  background-position: center top;
+  background-size: auto; /* keep original image size so it tiles cleanly */
+  background-repeat: repeat-y; /* repeat vertically */
+  background-attachment: scroll;
+}
+
+.hero-frame {
+  width: 100%;
+  max-width: calc(200vw - 80px);
+  height: 80%;
+  aspect-ratio: 1920 / 1080;
+  overflow: hidden;
+  border-radius: 12px;
+  margin-top: 80px; /* Flyt hele video-rammen og videoen ned */
+}
+
+/* Video-elementet får margin-top for at flytte det lidt ned */
+.hero-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  margin-top: 100;
+}
+
+
+/* Topbar */
+.topbar {
+  width: 100%;
+  overflow: hidden;
+  background: #d8f1d6;
+  border-bottom: 1px solid #eee;
+  height: 38px;
+  position: relative;
+  z-index: 61;
+}
+
+.topbar-inner {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  height: 100%;
+  white-space: nowrap;
+}
+
+/* Hero image section */
+.hero-wrap {
+  background: url("data:image/svg+xml,\
+  <svg xmlns='http://www.w3.org/2000/svg' width='700' height='700' viewBox='0 0 700 700'>\
+  <path d='M0 0 C80 40 140 10 220 70 S380 150 460 80 S600 0 700 50 V700 H0 Z'\
+  fill='none' stroke='%23d8d8d8' stroke-width='1' opacity='0.25'/></svg>")
+  repeat;
+  padding: 40px 0 60px;
+}
+
+.hero-frame {
+  width: 88%;
+  max-width: 1200px;
+  margin: 6 auto;
+  background: white;
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.1);
+}
+
+.hero-img {
+  width: 100%;
+  display: block;
+  border-radius: 16px;
+}
+
+/* FEATURES SECTION */
+.features {
+  width: 90%;
+  max-width: 1250px;
+  /* pull the block up so it sits over the hero background image */
+  margin: -20px auto 90px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px;
+  /* padding: 20px on top as requested; extra horizontal padding for breathing room */
+  padding: 20px 20px 40px;
+  background: var(--bg-cream);
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+}
+
+.feature {
+  background: white;
+  border-radius: 18px;
+  padding: 26px 22px 30px;
+  text-align: center;
+ 
+}
+
+.icon {
+  font-size: 42px;
+  margin-bottom: 16px;
+}
+
+/* Image icon inside feature blocks */
+.feature .icon img,
+.feature-icon{
+  width:42px;
+  height:42px;
+  object-fit:contain;
+  display:inline-block;
+  margin-bottom:16px;
+}
+
+.features .feature:first-child .feature-icon {
+  margin-top: 0;
+  transform: translateY(12px);
+}
+
+.feature h3 {
+  margin: 0 0 12px;
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.feature p {
+  margin: 0;
+  font-size: 14px;
+  opacity: 0.75;
+  line-height: 1.52;
+}
+
+/* Responsive */
+@media (max-width: 1100px) {
+  .features {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 650px) {
+  .features {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+ *//* Mest købte produkter bar */
+ 
+.mest-kobte-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0;
+  width: 100%;
+  padding: 0 24px;
+}
+.mest-kobte-label {
+  font-size: 2rem;
+  color: #000000;
+  font-weight: 500;
+  margin-right: 18px;
+  margin-left: 62px;
+  margin-top: 0px;
+  font-family: "Inter", sans-serif;
+}
+.mest-btn {
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 8px 25px;
+  border-radius: 22px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border 0.2s;
+  margin-left: 15px;
+  margin-top: -100px;
+  
+}
+.mest-btn-black {
+  background: #111;
+  color: #fff;
+  border: none;
+}
+.mest-btn-white {
+  background: #fff;
+  color: #111;
+  border: 2px solid #111;
+}
+.mest-btn-placeholder {
+  background: #000000;
+  color: #ffffff;
+  border: none;
+  margin-left: auto;
+}
+
+
+
+/* Responsive */
+@media (max-width: 900px) {
+  .product-card{width:240px;height:240px;transform:translateY(-90px)}
+}
+
+@media (max-width: 520px) {
+  .product-card{transform:translateY(-60px)}
+}
+
+/* Hvorfor Lumina section */
+.why-lumina {
+  width: 100%;
+  padding: 90px 36px;
+  background: var(--bg-cream);
+}
+
+.why-lumina-inner {
+  max-width: 3500px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.why-lumina h2 {
+  font-size: 3.6rem;
+  font-weight: 800;
+  margin-bottom: 28px;
+  margin-top:198px;
+  color: var(--accent-dark);
+  letter-spacing: -0.5px;
+}
+
+.why-lumina p {
+  font-size: 1.50rem;
+  line-height: 1.5;
+  margin-bottom: 0;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Headline and description above carousel */
+.hvorfor-lumina-intro {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 40px auto;
+}
+.hvorfor-lumina-intro h2 {
+  font-size: 2.4rem;
+  font-weight: 700;
+  margin-bottom: 18px;
+  color: var(--accent-dark);
+}
+.hvorfor-lumina-desc {
+  font-size: 1rem;
+  color: var(--muted);
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* Headline and description above carousel */
+.hvorfor-lumina-intro {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 40px auto;
+}
+
+/* Product Carousel */
+.product-carousel {
+  width: 100vw;
+  max-width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  position: relative;
+  padding: 60px 20px;
+  background: #ffffff;
+}
+
+.carousel-container {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.carousel-track-wrapper {
+  flex: 1;
+  overflow: hidden;
+}
+
+.carousel-track {
+  display: flex;
+  gap: 32px;
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.carousel-item {
+  flex: 0 0 420px;
+  text-align: left;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.carousel-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  aspect-ratio: 1;
+  max-width: 440px;
+}
+
+.carousel-item-name {
+  margin: -30px 0 0 1px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #6B6B6B;
+  position: static;
+  padding: 0;
+}
+
+.carousel-item-price {
+  margin: 4px 0 0 1px;
+  font-size: 18px;
+  color: #999;
+  position: static;
+  padding: 0;
+}
+
+.carousel-btn {
+  flex: 0 0 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(0,0,0,0.1);
+  background: #ffffff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: var(--accent-dark);
+  transition: all 0.3s ease;
+}
+
+.carousel-btn:hover {
+  background: var(--bg-cream);
+  border-color: rgba(0,0,0,0.2);
+}
+
+.carousel-btn:active {
+  transform: scale(0.95);
+}
+
+@media (max-width: 768px) {
+  .carousel-item {
+    flex: 0 0 140px;
+  }
+  
+  .carousel-btn {
+    flex: 0 0 40px;
+    height: 40px;
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 520px) {
+  .carousel-item {
+    flex: 0 0 120px;
+  }
+  
+  .carousel-btn {
+    flex: 0 0 36px;
+    height: 36px;
+    font-size: 18px;
+  }
+}
+
+.pill {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.04);
+  font-size: 13px;
+}
+
+/* Hidden accessibility helpers */
+.visually-hidden {
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap;
+}
+
+.carousel-item:first-child .mest-kobte-label-absolute {
+  top: 0;
+}
+
+/* Hvorfor Lumina billeder row */
+.hvorfor-billeder-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+  margin: 300px 0 300px 0;
+}
+.hvorfor-billeder-row img {
+  flex: 1 1 0;
+  width: 10%;
+  max-width: 500px;
+  height: 760px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+}
+
+/* Picnic image styling */
+.picnic-image-row {
+  display: flex;
+  justify-content: flex-start;
+  align-items: stretch;
+  margin-bottom: 60px;
+  position: relative;
+  gap: 0px;
+}
+.picnic-image-row img {
+  width: 100%;
+  max-width: 1000px;
+  height: 900px;
+  aspect-ratio: 16/9;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+  object-fit: cover;
+  position: relative;
+  z-index: 2;
+  flex: 1 1 0;
+}
+.picnic-bg-box {
+  flex: 1 1 0;
+  max-width: 1700px;
+  aspect-ratio: 16/9;
+  border-radius: 0px;
+  background: #f3f3f3;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+  display: block;
+}
+.picnic-box-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100%;
+  padding: 40px 36px;
+  font-size: 7rem;
+  font-weight: 750;
+  color: #23201b;
+  line-height: 50px;
+  white-space: pre-line;
+  margin-top: 20px;
+  margin-left: 30px;
+}
+.picnic-box-subtext {
+  font-size: 1.5rem;
+  color: #888;
+  font-weight: 400;
+  margin-top: 420px;
+  margin-bottom: 4px;
+}
+.picnic-box-btn {
+  margin-top: 0px;
+  background: #111;
+  color: #fff;
+  border: none;
+  border-radius: 24px;
+  padding: 14px 38px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.picnic-box-btn:hover {
+  background: #23201b;
+}
+
+.kundesiger-headline {
+  text-align: center;
+  font-size: 2.1rem;
+  font-weight: 700;
+  color: #23201b;
+  margin: 280px 0 40px 0;
+  letter-spacing: -0.5px;
+}
+
+/* Kundesiger carousel */
+
+/* Customer reviews flex row */
+.customer-reviews-flex {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 32px;
+  margin: 40px 0 60px 0;
+  flex-wrap: wrap;
+}
+
+.customer-reviews-flex .textwrapper {
+  background: #f5f5f5;
+  border-radius: 8px;
+  padding:0px 20px;
+  font-size: 1.15rem;
+  color: #23201b;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  max-width: 370px;
+  max-height: 100px;
+  min-width: 220px;
+  min-height: 200px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: content-justify;
+  text-align: center;
+  font-family: "Inter", "Roboto", sans-serif;
+}
+
+.review-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 20px;
+}
+
+.review-intersect {
+  display: block;
+  margin: 22px auto 0 auto;
+  max-width: 100px;
+  width: 38%;
+  height: auto;
+}
+
+.review-stars-bar {
+  width: 100%;
+  background: #f0f0f0;
+  border-radius: 12px 12px 0 0;
+  padding: 10px 0 6px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: -25px;
+}
+
+.review-stars {
+  display: block;
+  margin: 0 auto;
+  max-width: 90px;
+  width: 60%;
+  height: auto;
+}
+
+.review-name {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 1.2rem;
+  color: #6b665f;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  font-family: "Inter", "Roboto", sans-serif;
+}
+
+.review-trustpilot {
+  display: block;
+  margin: 12px auto 0 auto;
+  max-width: 80px;
+  width: 50%;
+  height: auto;
+}
+
+
+.why-lumina-bgbox p {
+  color: #fff;
+  font-size: 1.35rem;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.page-footer {
+  width: 100%;
+  background: #f5f5f5;
+  padding: 24px 0;
+  text-align: center;
+  font-size: 1rem;
+  color: #6b665f;
+  margin-top: 48px;
+}
+
+.footer-inner {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+
+.mest-btn,
+.picnic-box-btn,
+.cta {
+  transition: transform 0.18s cubic-bezier(.4,1.3,.5,1), box-shadow 0.18s cubic-bezier(.4,1.3,.5,1), background 0.18s;
+}
+
+.icon-btn {
+  transition: transform 0.18s cubic-bezier(.4,1.3,.5,1);
+  background: none !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+
+.mest-btn:hover,
+.picnic-box-btn:hover,
+.cta:hover {
+  transform: scale(1.07) translateY(-2px);
+  box-shadow: 0 6px 24px rgba(37,99,235,0.13), 0 1.5px 6px rgba(0,0,0,0.08);
+  background: #e5e6e3;
+  cursor: pointer;
+}
+
+.icon-btn:hover {
+  transform: scale(1.07) translateY(-2px);
+  background: none !important;
+  box-shadow: none !important;
+  cursor: pointer;
+}
+
